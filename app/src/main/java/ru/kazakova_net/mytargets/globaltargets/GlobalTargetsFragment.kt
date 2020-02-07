@@ -37,13 +37,21 @@ class GlobalTargetsFragment : Fragment() {
 
         binding.globalTargetsList.adapter = adapter
 
-        viewModel.navigateToSubTargets.observe(this, Observer { targetId ->
+        viewModel.navigateToSubTargets.observe(viewLifecycleOwner, Observer { targetId ->
             targetId?.let {
                 // todo navigate
                 Toast.makeText(context, "Тыдыщ!", Toast.LENGTH_SHORT).show()
+
+                viewModel.doneSubTargetsNavigate()
             }
         })
 
-        return super.onCreateView(inflater, container, savedInstanceState)
+        viewModel.targets.observe(viewLifecycleOwner, Observer { targets->
+            targets?.let {
+                adapter.submitList(targets)
+            }
+        })
+
+        return binding.root
     }
 }
