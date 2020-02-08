@@ -41,7 +41,6 @@ class GlobalTargetsAdapter(val clickListener: GlobalTargetsListener) :
     }
 }
 
-
 class GlobalTargetsDiffCallback : DiffUtil.ItemCallback<Target>() {
 
     override fun areItemsTheSame(oldItem: Target, newItem: Target): Boolean {
