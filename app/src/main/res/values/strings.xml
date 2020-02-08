@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">My Targets</string>
+    <string name="add_target">Добавить цель</string>
+    <string name="save">Сохранить</string>
+    <string name="title">Название</string>
+    <string name="description">Описание</string>
+    <string name="long_text">Подробное описание</string>
 </resources>

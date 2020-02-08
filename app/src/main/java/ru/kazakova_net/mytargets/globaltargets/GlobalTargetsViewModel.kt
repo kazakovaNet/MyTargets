@@ -17,16 +17,13 @@ class GlobalTargetsViewModel(
 
     val targets = database.getAllTargets()
 
-    init {
-        resetTargetsList()
-    }
-
     private val _navigateToSubTargets = MutableLiveData<Long>()
     val navigateToSubTargets
         get() = _navigateToSubTargets
 
-    fun resetTargetsList() {
-    }
+    private val _navigateToAddNewTarget = MutableLiveData<Long?>()
+    val navigateToAddNewTarget
+        get() = _navigateToAddNewTarget
 
     fun onGlobalTargetClicked(targetId: Long) {
         _navigateToSubTargets.value = targetId
@@ -34,5 +31,13 @@ class GlobalTargetsViewModel(
 
     fun doneSubTargetsNavigate() {
         _navigateToSubTargets.value = null
+    }
+
+    fun onAddNewTargetClicked() {
+        _navigateToAddNewTarget.value = -1
+    }
+
+    fun doneAddNewTargetNavigate() {
+        _navigateToAddNewTarget.value = null
     }
 }

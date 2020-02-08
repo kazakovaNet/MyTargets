@@ -6,5 +6,23 @@
     <fragment
         android:id="@+id/globalTargetsFragment"
         android:name="ru.kazakova_net.mytargets.globaltargets.GlobalTargetsFragment"
-        android:label="GlobalTargetsFragment" />
+        android:label="GlobalTargetsFragment" >
+        <action
+            android:id="@+id/action_globalTargetsFragment_to_addNewTargetFragment"
+            app:destination="@id/addNewTargetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewTargetFragment"
+        android:name="ru.kazakova_net.mytargets.addnewtarget.AddNewTargetFragment"
+        android:label="AddNewTargetFragment" >
+        <argument
+            android:name="targetId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_addNewTargetFragment_to_globalTargetsFragment"
+            app:destination="@id/globalTargetsFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@+id/globalTargetsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
