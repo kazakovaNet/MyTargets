@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import ru.kazakova_net.mytargets.R
+import ru.kazakova_net.mytargets.database.TargetsDatabase
 import ru.kazakova_net.mytargets.databinding.FragmentGlobalTargetsBinding
 
 /**
@@ -26,7 +27,7 @@ class GlobalTargetsFragment : Fragment() {
             inflater, R.layout.fragment_global_targets, container, false
         )
 
-        val viewModel = ViewModelProvider(this).get(GlobalTargetsViewModel::class.java)
+        val viewModel = setupViewModel()
 
         binding.globalTargetsViewModel = viewModel
         binding.lifecycleOwner = this
@@ -46,12 +47,21 @@ class GlobalTargetsFragment : Fragment() {
             }
         })
 
-        viewModel.targets.observe(viewLifecycleOwner, Observer { targets->
+        viewModel.targets.observe(viewLifecycleOwner, Observer { targets ->
             targets?.let {
                 adapter.submitList(targets)
             }
         })
 
         return binding.root
+    }
+
+    private fun setupViewModel(): GlobalTargetsViewModel {
+        val application = requireNotNull(this.activity).application
+        val dataSource = TargetsDatabase.getInstance(application).targetsDatabaseDao
+        val viewModelFactory = GlobalTargetsViewModelFactory(dataSource, application)
+        val viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(GlobalTargetsViewModel::class.java)
+        return viewModel
     }
 }
