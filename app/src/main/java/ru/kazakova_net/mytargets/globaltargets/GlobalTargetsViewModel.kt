@@ -2,9 +2,8 @@ package ru.kazakova_net.mytargets.globaltargets
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.*
 import ru.kazakova_net.mytargets.database.Target
 import ru.kazakova_net.mytargets.database.TargetsDatabaseDao
 
@@ -13,15 +12,19 @@ import ru.kazakova_net.mytargets.database.TargetsDatabaseDao
  */
 class GlobalTargetsViewModel(
     val database: TargetsDatabaseDao,
-    application: Application) : AndroidViewModel(application) {
+    application: Application
+) : AndroidViewModel(application) {
 
     val targets = database.getAllTargets()
+
+    private var viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val _navigateToSubTargets = MutableLiveData<Long>()
     val navigateToSubTargets
         get() = _navigateToSubTargets
 
-    private val _navigateToAddNewTarget = MutableLiveData<Long?>()
+    private val _navigateToAddNewTarget = MutableLiveData<Target?>()
     val navigateToAddNewTarget
         get() = _navigateToAddNewTarget
 
@@ -34,7 +37,27 @@ class GlobalTargetsViewModel(
     }
 
     fun onAddNewTargetClicked() {
-        _navigateToAddNewTarget.value = -1
+        uiScope.launch {
+            val target = Target()
+            // todo
+//            newTarget.parentTargetId = -1
+
+            insert(target)
+
+            _navigateToAddNewTarget.value = getNewTargetFromDatabase()
+        }
+    }
+
+    private suspend fun insert(newTarget: Target) {
+        withContext(Dispatchers.IO) {
+            database.insert(newTarget)
+        }
+    }
+
+    private suspend fun getNewTargetFromDatabase(): Target? {
+        return withContext(Dispatchers.IO) {
+            database.getNewTarget()
+        }
     }
 
     fun doneAddNewTargetNavigate() {

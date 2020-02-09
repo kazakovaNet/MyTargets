@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import ru.kazakova_net.mytargets.R
 import ru.kazakova_net.mytargets.database.TargetsDatabase
 import ru.kazakova_net.mytargets.databinding.FragmentAddNewTargetBinding
+import ru.kazakova_net.mytargets.utility.hideKeyboard
 
 /**
  * Created by Kazakova_net on 08.02.2020.
@@ -34,11 +35,19 @@ class AddNewTargetFragment : Fragment() {
 
         viewModel.navigateToParentTarget.observe(viewLifecycleOwner, Observer {
             if (it == true) {
-                this.findNavController().navigate(
-                    AddNewTargetFragmentDirections.actionAddNewTargetFragmentToGlobalTargetsFragment())
+                activity?.let { fragmentActivity -> hideKeyboard(fragmentActivity) }
+
+                this.findNavController().navigate(AddNewTargetFragmentDirections
+                    .actionAddNewTargetFragmentToGlobalTargetsFragment())
+
                 viewModel.doneParentTargetNavigate()
             }
         })
+
+        viewModel.newTarget.observe(viewLifecycleOwner, Observer { newTarget->
+            binding.newTarget = newTarget
+        })
+
         return binding.root
     }
 

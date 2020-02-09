@@ -26,4 +26,7 @@ interface TargetsDatabaseDao {
 
     @Query("SELECT * FROM targets ORDER BY targetId DESC")
     fun getAllTargets(): LiveData<List<Target>>
+
+    @Query("SELECT * FROM targets ORDER BY targetId DESC LIMIT 1")
+    fun getNewTarget(): Target?
 }

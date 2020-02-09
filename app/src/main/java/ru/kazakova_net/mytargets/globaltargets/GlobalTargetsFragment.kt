@@ -54,11 +54,11 @@ class GlobalTargetsFragment : Fragment() {
             }
         })
 
-        viewModel.navigateToAddNewTarget.observe(viewLifecycleOwner, Observer { parentTargetId->
-            parentTargetId?.let {
+        viewModel.navigateToAddNewTarget.observe(viewLifecycleOwner, Observer { newTarget->
+            newTarget?.let {
                 this.findNavController().navigate(
                     GlobalTargetsFragmentDirections
-                        .actionGlobalTargetsFragmentToAddNewTargetFragment(parentTargetId))
+                        .actionGlobalTargetsFragmentToAddNewTargetFragment(newTarget.targetId))
 
                 viewModel.doneAddNewTargetNavigate()
             }
