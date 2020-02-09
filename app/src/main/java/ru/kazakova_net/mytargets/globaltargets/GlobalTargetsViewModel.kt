@@ -15,7 +15,7 @@ class GlobalTargetsViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
-    val targets = database.getAllTargets()
+    val targets = database.getAllGlobalTargets()
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -39,8 +39,6 @@ class GlobalTargetsViewModel(
     fun onAddNewTargetClicked() {
         uiScope.launch {
             val target = Target()
-            // todo
-//            newTarget.parentTargetId = -1
 
             insert(target)
 

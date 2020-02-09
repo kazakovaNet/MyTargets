@@ -11,6 +11,7 @@ data class Target(
 
     @PrimaryKey(autoGenerate = true)
     val targetId: Long = 0L,
+    val parentId: Long = -1,
     var title: String = "",
     var description: String = "",
     var longText: String = ""
