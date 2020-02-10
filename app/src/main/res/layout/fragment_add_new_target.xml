@@ -34,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/title"
+                android:inputType="textCapSentences"
                 android:text="@={newTarget.title}" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,6 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/description"
+                android:inputType="textCapSentences"
                 android:text="@={newTarget.description}" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/long_text"
+                android:inputType="textMultiLine|textCapSentences"
                 android:text="@={newTarget.longText}" />
         </com.google.android.material.textfield.TextInputLayout>
 
