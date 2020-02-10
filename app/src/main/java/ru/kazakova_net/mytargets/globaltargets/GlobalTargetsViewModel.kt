@@ -24,7 +24,7 @@ class GlobalTargetsViewModel(
     val navigateToSubTargets
         get() = _navigateToSubTargets
 
-    private val _navigateToAddNewTarget = MutableLiveData<Target?>()
+    private val _navigateToAddNewTarget = MutableLiveData<Long?>()
     val navigateToAddNewTarget
         get() = _navigateToAddNewTarget
 
@@ -42,7 +42,7 @@ class GlobalTargetsViewModel(
 
             insert(target)
 
-            _navigateToAddNewTarget.value = getNewTargetFromDatabase()
+            _navigateToAddNewTarget.value = getNewTargetFromDatabase()?.targetId
         }
     }
 

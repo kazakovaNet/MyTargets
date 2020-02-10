@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -41,8 +40,10 @@ class GlobalTargetsFragment : Fragment() {
 
         viewModel.navigateToSubTargets.observe(viewLifecycleOwner, Observer { targetId ->
             targetId?.let {
-                // todo navigate
-                Toast.makeText(context, "Тыдыщ!", Toast.LENGTH_SHORT).show()
+                this.findNavController().navigate(
+                    GlobalTargetsFragmentDirections
+                        .actionGlobalTargetsFragmentToTargetDetailFragment(targetId)
+                )
 
                 viewModel.doneSubTargetsNavigate()
             }
@@ -54,11 +55,12 @@ class GlobalTargetsFragment : Fragment() {
             }
         })
 
-        viewModel.navigateToAddNewTarget.observe(viewLifecycleOwner, Observer { newTarget->
-            newTarget?.let {
+        viewModel.navigateToAddNewTarget.observe(viewLifecycleOwner, Observer { newTargetId ->
+            newTargetId?.let {
                 this.findNavController().navigate(
                     GlobalTargetsFragmentDirections
-                        .actionGlobalTargetsFragmentToAddNewTargetFragment(newTarget.targetId))
+                        .actionGlobalTargetsFragmentToAddNewTargetFragment(newTargetId)
+                )
 
                 viewModel.doneAddNewTargetNavigate()
             }

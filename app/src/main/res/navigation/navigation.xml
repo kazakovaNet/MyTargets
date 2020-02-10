@@ -10,6 +10,9 @@
         <action
             android:id="@+id/action_globalTargetsFragment_to_addNewTargetFragment"
             app:destination="@id/addNewTargetFragment" />
+        <action
+            android:id="@+id/action_globalTargetsFragment_to_targetDetailFragment"
+            app:destination="@id/targetDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewTargetFragment"
@@ -24,5 +27,13 @@
             app:launchSingleTop="false"
             app:popUpTo="@+id/globalTargetsFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/targetDetailFragment"
+        android:name="ru.kazakova_net.mytargets.targetdetails.TargetDetailFragment"
+        android:label="TargetDetailFragment" >
+        <argument
+            android:name="targetId"
+            app:argType="long" />
     </fragment>
 </navigation>
