@@ -8,18 +8,23 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="addNewTargetFragment">
+                  <entry key="editTargetFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
+                            <option name="x" value="256" />
                             <option name="y" value="12" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_addNewTargetFragment_to_globalTargetsFragment">
+                            <entry key="action_editTargetFragment_to_globalTargetsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_editTargetFragment_to_targetDetailFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -34,13 +39,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="256" />
-                            <option name="y" value="12" />
+                            <option name="x" value="12" />
+                            <option name="y" value="33" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_globalTargetsFragment_to_addNewTargetFragment">
+                            <entry key="action_globalTargetsFragment_to_editTargetFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -61,8 +66,17 @@
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="500" />
-                            <option name="y" value="12" />
+                            <option name="y" value="33" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_targetDetailFragment_to_editTargetFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

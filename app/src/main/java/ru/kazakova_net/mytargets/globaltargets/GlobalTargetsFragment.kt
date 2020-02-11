@@ -59,7 +59,7 @@ class GlobalTargetsFragment : Fragment() {
             newTargetId?.let {
                 this.findNavController().navigate(
                     GlobalTargetsFragmentDirections
-                        .actionGlobalTargetsFragmentToAddNewTargetFragment(newTargetId)
+                        .actionGlobalTargetsFragmentToEditTargetFragment(newTargetId)
                 )
 
                 viewModel.doneAddNewTargetNavigate()

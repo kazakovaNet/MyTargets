@@ -1,4 +1,4 @@
-package ru.kazakova_net.mytargets.addnewtarget
+package ru.kazakova_net.mytargets.edittarget
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,7 @@ import ru.kazakova_net.mytargets.database.TargetsDatabaseDao
 /**
  * Created by Kazakova_net on 08.02.2020.
  */
-class AddNewTargetViewModel(
+class EditTargetViewModel(
     val newTargetId: Long,
     val database: TargetsDatabaseDao
 ) : ViewModel() {
@@ -31,7 +31,7 @@ class AddNewTargetViewModel(
         get() = _newTarget
 
     private val _navigateToParentTarget = MutableLiveData<Boolean?>()
-    val navigateToParentTarget: LiveData<Boolean?>
+    val navigateToInitialTarget: LiveData<Boolean?>
         get() = _navigateToParentTarget
 
     override fun onCleared() {

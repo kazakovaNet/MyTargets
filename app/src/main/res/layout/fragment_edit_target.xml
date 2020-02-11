@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
-            name="addNewTargetViewModel"
-            type="ru.kazakova_net.mytargets.addnewtarget.AddNewTargetViewModel" />
+            name="editTargetViewModel"
+            type="ru.kazakova_net.mytargets.edittarget.EditTargetViewModel" />
 
         <variable
             name="newTarget"
@@ -83,7 +82,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/design_default_color_primary_dark"
-            android:onClick="@{()->addNewTargetViewModel.onSaveTargetClicked(newTarget)}"
+            android:onClick="@{()->editTargetViewModel.onSaveTargetClicked(newTarget)}"
             android:text="@string/save"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"

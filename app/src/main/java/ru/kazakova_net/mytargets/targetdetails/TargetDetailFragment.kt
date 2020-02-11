@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import ru.kazakova_net.mytargets.R
 import ru.kazakova_net.mytargets.database.TargetsDatabase
 import ru.kazakova_net.mytargets.databinding.FragmentTargetDetailBinding
@@ -39,8 +40,10 @@ class TargetDetailFragment : Fragment() {
 
         viewModel.navigateToEditTarget.observe(viewLifecycleOwner, Observer { targetId ->
             targetId?.let {
-                // todo
-                Toast.makeText(context, "Тыдыщ!", Toast.LENGTH_SHORT).show()
+                this.findNavController().navigate(
+                    TargetDetailFragmentDirections
+                        .actionTargetDetailFragmentToEditTargetFragment(targetId)
+                )
 
                 viewModel.doneEditTargetNavigate()
             }
