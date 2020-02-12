@@ -34,6 +34,10 @@ class TargetDetailViewModel(
     val navigateToEditTarget: LiveData<Long?>
         get() = _navigateToEditTarget
 
+    private val _navigateToAddTarget = MutableLiveData<Long?>()
+    val navigateToAddTarget: LiveData<Long?>
+        get() = _navigateToAddTarget
+
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
@@ -43,7 +47,34 @@ class TargetDetailViewModel(
         _navigateToEditTarget.value = target.targetId
     }
 
+    fun onAddTargetClicked(target: Target) {
+        uiScope.launch {
+            val newTarget = Target()
+            newTarget.parentId = target.targetId
+
+            insert(newTarget)
+
+            _navigateToAddTarget.value = getNewTargetFromDatabase()?.targetId
+        }
+    }
+
+    private suspend fun insert(newTarget: Target) {
+        withContext(Dispatchers.IO) {
+            database.insert(newTarget)
+        }
+    }
+
+    private suspend fun getNewTargetFromDatabase(): Target? {
+        return withContext(Dispatchers.IO) {
+            database.getNewTarget()
+        }
+    }
+
     fun doneEditTargetNavigate() {
         _navigateToEditTarget.value = null
+    }
+
+    fun doneAddTargetNavigate() {
+        _navigateToAddTarget.value = null
     }
 }

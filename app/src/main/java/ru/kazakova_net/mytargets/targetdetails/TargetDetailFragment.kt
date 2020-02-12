@@ -49,6 +49,17 @@ class TargetDetailFragment : Fragment() {
             }
         })
 
+        viewModel.navigateToAddTarget.observe(viewLifecycleOwner, Observer { targetId ->
+            targetId?.let {
+                this.findNavController().navigate(
+                    TargetDetailFragmentDirections
+                        .actionTargetDetailFragmentToEditTargetFragment(targetId)
+                )
+
+                viewModel.doneAddTargetNavigate()
+            }
+        })
+
         return binding.root
     }
 
