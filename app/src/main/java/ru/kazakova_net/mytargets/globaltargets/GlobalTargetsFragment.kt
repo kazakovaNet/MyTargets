@@ -69,6 +69,12 @@ class GlobalTargetsFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        this.activity?.title = getString(R.string.app_name)
+    }
+
     private fun setupViewModel(): GlobalTargetsViewModel {
         val application = requireNotNull(this.activity).application
         val dataSource = TargetsDatabase.getInstance(application).targetsDatabaseDao

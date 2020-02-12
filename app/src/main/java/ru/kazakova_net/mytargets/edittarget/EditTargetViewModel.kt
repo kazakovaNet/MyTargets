@@ -39,7 +39,7 @@ class EditTargetViewModel(
         viewModelJob.cancel()
     }
 
-    fun doneParentTargetNavigate() {
+    fun doneToInitialTargetNavigate() {
         _navigateToParentTarget.value = null
     }
 

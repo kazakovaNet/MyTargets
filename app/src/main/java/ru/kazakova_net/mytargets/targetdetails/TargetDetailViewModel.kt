@@ -26,6 +26,8 @@ class TargetDetailViewModel(
         }
     }
 
+    val childTargets = database.getChildTargets(targetId)
+
     private val _target = MutableLiveData<Target>()
     val target: LiveData<Target>
         get() = _target
@@ -37,6 +39,10 @@ class TargetDetailViewModel(
     private val _navigateToAddTarget = MutableLiveData<Long?>()
     val navigateToAddTarget: LiveData<Long?>
         get() = _navigateToAddTarget
+
+    private val _navigateToDetailsChildTarget = MutableLiveData<Long>()
+    val navigateToDetailsChildTarget: LiveData<Long>
+        get() = _navigateToDetailsChildTarget
 
     override fun onCleared() {
         super.onCleared()
@@ -58,6 +64,10 @@ class TargetDetailViewModel(
         }
     }
 
+    fun onChildTargetClicked(targetId: Long) {
+        _navigateToDetailsChildTarget.value = targetId
+    }
+
     private suspend fun insert(newTarget: Target) {
         withContext(Dispatchers.IO) {
             database.insert(newTarget)
@@ -76,5 +86,9 @@ class TargetDetailViewModel(
 
     fun doneAddTargetNavigate() {
         _navigateToAddTarget.value = null
+    }
+
+    fun doneDetailsChildTargetNavigate() {
+        _navigateToDetailsChildTarget.value = null
     }
 }

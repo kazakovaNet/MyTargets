@@ -11,7 +11,7 @@
 
         <variable
             name="clickListener"
-            type="ru.kazakova_net.mytargets.globaltargets.GlobalTargetsListener" />
+            type="ru.kazakova_net.mytargets.targetdetails.ChildTargetsListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,21 +20,21 @@
         android:onClick="@{()->clickListener.onClick(target)}">
 
         <TextView
-            android:id="@+id/global_target_title"
+            android:id="@+id/target_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="@{target.title}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Target 1" />
 
         <TextView
-            android:id="@+id/global_target_description"
+            android:id="@+id/target_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -42,11 +42,11 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:text="@{target.description}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/global_target_title"
+            app:layout_constraintTop_toBottomOf="@+id/target_title"
             tools:text="Short description global target 1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

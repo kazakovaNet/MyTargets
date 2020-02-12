@@ -2,6 +2,7 @@ package ru.kazakova_net.mytargets.globaltargets
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
 import ru.kazakova_net.mytargets.database.Target
@@ -21,7 +22,7 @@ class GlobalTargetsViewModel(
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val _navigateToSubTargets = MutableLiveData<Long>()
-    val navigateToSubTargets
+    val navigateToSubTargets: LiveData<Long>
         get() = _navigateToSubTargets
 
     private val _navigateToAddNewTarget = MutableLiveData<Long?>()

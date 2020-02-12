@@ -32,4 +32,7 @@ interface TargetsDatabaseDao {
 
     @Query("SELECT * FROM targets WHERE parentId = -1")
     fun getAllGlobalTargets(): LiveData<List<Target>>
+
+    @Query("SELECT * FROM targets WHERE parentId = :parentId")
+    fun getChildTargets(parentId: Long): LiveData<List<Target>>
 }

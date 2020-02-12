@@ -13,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import ru.kazakova_net.mytargets.R
 import ru.kazakova_net.mytargets.database.TargetsDatabase
 import ru.kazakova_net.mytargets.databinding.FragmentTargetDetailBinding
+import ru.kazakova_net.mytargets.globaltargets.GlobalTargetsAdapter
+import ru.kazakova_net.mytargets.globaltargets.GlobalTargetsListener
 
 /**
  * Created by NKazakova on 10.02.2020.
@@ -32,6 +34,12 @@ class TargetDetailFragment : Fragment() {
 
         binding.targetDetailViewModel = viewModel
         binding.lifecycleOwner = this
+
+        val adapter = ChildTargetsAdapter(ChildTargetsListener { targetId ->
+            viewModel.onChildTargetClicked(targetId)
+        })
+
+        binding.childTargetsList.adapter = adapter
 
         viewModel.target.observe(viewLifecycleOwner, Observer { target ->
             binding.target = target
@@ -57,6 +65,23 @@ class TargetDetailFragment : Fragment() {
                 )
 
                 viewModel.doneAddTargetNavigate()
+            }
+        })
+
+        viewModel.navigateToDetailsChildTarget.observe(viewLifecycleOwner, Observer { targetId ->
+            targetId?.let {
+                this.findNavController().navigate(
+                    TargetDetailFragmentDirections
+                        .actionTargetDetailFragmentSelf(targetId)
+                )
+
+                viewModel.doneDetailsChildTargetNavigate()
+            }
+        })
+
+        viewModel.childTargets.observe(viewLifecycleOwner, Observer { targets ->
+            targets?.let {
+                adapter.submitList(targets)
             }
         })
 

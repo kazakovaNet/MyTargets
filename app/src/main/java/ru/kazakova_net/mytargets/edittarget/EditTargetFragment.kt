@@ -19,7 +19,6 @@ import ru.kazakova_net.mytargets.utility.hideKeyboard
  */
 class EditTargetFragment : Fragment() {
 
-    private var isEdit: Boolean = false
     private var targetId: Long = -1
 
     override fun onCreateView(
@@ -36,29 +35,22 @@ class EditTargetFragment : Fragment() {
         binding.editTargetViewModel = viewModel
         binding.lifecycleOwner = this
 
+        viewModel.newTarget.observe(viewLifecycleOwner, Observer { newTarget ->
+            binding.newTarget = newTarget
+        })
+
         viewModel.navigateToInitialTarget.observe(viewLifecycleOwner, Observer {
             if (it != true) {
                 return@Observer
             }
             activity?.let { fragmentActivity -> hideKeyboard(fragmentActivity) }
 
-            if (isEdit) {
-                this.findNavController().navigate(
-                    EditTargetFragmentDirections
-                        .actionEditTargetFragmentToTargetDetailFragment(targetId)
-                )
-            } else {
-                this.findNavController().navigate(
-                    EditTargetFragmentDirections
-                        .actionEditTargetFragmentToGlobalTargetsFragment()
-                )
-            }
+            this.findNavController().navigate(
+                EditTargetFragmentDirections
+                    .actionEditTargetFragmentToTargetDetailFragment(targetId)
+            )
 
-            viewModel.doneParentTargetNavigate()
-        })
-
-        viewModel.newTarget.observe(viewLifecycleOwner, Observer { newTarget ->
-            binding.newTarget = newTarget
+            viewModel.doneToInitialTargetNavigate()
         })
 
         return binding.root
@@ -66,7 +58,6 @@ class EditTargetFragment : Fragment() {
 
     private fun setupViewModel(): EditTargetViewModel {
         val arguments = EditTargetFragmentArgs.fromBundle(arguments!!)
-        isEdit = arguments.isEdit
         targetId = arguments.targetId
         val application = requireNotNull(this.activity).application
         val dataSource = TargetsDatabase.getInstance(application).targetsDatabaseDao
