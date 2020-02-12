@@ -18,60 +18,74 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/target_title"
+        <LinearLayout
+            android:id="@+id/target_info_panel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{target.title}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:background="@color/target_details_info_panel_background_color"
+            android:orientation="vertical"
+            android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Target title" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/target_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{target.description}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/target_title"
-            tools:text="Target description" />
+            <TextView
+                android:id="@+id/target_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{target.title}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/target_details_info_panel_text_color"
+                tools:layout_editor_absoluteX="395dp"
+                tools:layout_editor_absoluteY="16dp"
+                tools:text="Target title" />
 
-        <TextView
-            android:id="@+id/target_long_text"
+            <TextView
+                android:id="@+id/target_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{target.description}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/target_details_info_panel_text_color"
+                tools:layout_editor_absoluteX="251dp"
+                tools:layout_editor_absoluteY="32dp"
+                tools:text="Target description" />
+
+            <TextView
+                android:id="@+id/target_long_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{target.longText}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/target_details_info_panel_text_color"
+                tools:layout_editor_absoluteX="295dp"
+                tools:layout_editor_absoluteY="72dp"
+                tools:text="Target long text" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/child_targets_list"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{target.longText}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/edit_target_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/target_description"
-            tools:text="Target long text" />
+            app:layout_constraintTop_toBottomOf="@+id/target_info_panel" />
 
         <Button
             android:id="@+id/edit_target_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
+            android:layout_marginEnd="1dp"
             android:background="@color/design_default_color_primary_dark"
             android:onClick="@{()->targetDetailViewModel.onEditTargetClicked(target)}"
             android:text="@string/edit"
             android:textColor="@android:color/white"
-            app:layout_constraintBottom_toTopOf="@+id/add_new_target_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/add_new_target_button"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
@@ -84,18 +98,8 @@
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/edit_target_button" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/child_targets_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/edit_target_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/target_long_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

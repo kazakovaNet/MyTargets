@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import ru.kazakova_net.mytargets.R
 import ru.kazakova_net.mytargets.database.TargetsDatabase
 import ru.kazakova_net.mytargets.databinding.FragmentGlobalTargetsBinding
@@ -31,6 +33,14 @@ class GlobalTargetsFragment : Fragment() {
 
         binding.globalTargetsViewModel = viewModel
         binding.lifecycleOwner = this
+
+        val layoutManager = LinearLayoutManager(context)
+        binding.globalTargetsList.layoutManager=layoutManager
+        val dividerItemDecoration = DividerItemDecoration(
+            binding.globalTargetsList.context,
+            layoutManager.orientation
+        )
+        binding.globalTargetsList.addItemDecoration(dividerItemDecoration)
 
         val adapter = GlobalTargetsAdapter(GlobalTargetsListener { targetId ->
             viewModel.onGlobalTargetClicked(targetId)

@@ -3,4 +3,7 @@
     <color name="colorPrimary">#2196F3</color>
     <color name="colorPrimaryDark">#3F51B5</color>
     <color name="colorAccent">#F44336</color>
+
+    <color name="target_details_info_panel_background_color">#F3E5F5</color>
+    <color name="target_details_info_panel_text_color">#8E24AA</color>
 </resources>

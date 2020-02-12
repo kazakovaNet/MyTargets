@@ -41,7 +41,7 @@
             android:name="targetId"
             app:argType="long" />
         <action
-            android:id="@+id/action_targetDetailFragment_to_editTargetFragment"
+            android:id="@+id/action_targetDetailFragment_to_addTargetFragment"
             app:destination="@id/editTargetFragment">
             <argument
                 android:name="isEdit"
@@ -50,5 +50,10 @@
         <action
             android:id="@+id/action_targetDetailFragment_self"
             app:destination="@id/targetDetailFragment" />
+        <action
+            android:id="@+id/action_targetDetailFragment_to_editTargetFragment"
+            app:destination="@id/editTargetFragment"
+            app:popUpTo="@id/targetDetailFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

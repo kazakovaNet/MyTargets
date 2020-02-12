@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import ru.kazakova_net.mytargets.R
 import ru.kazakova_net.mytargets.database.TargetsDatabase
 import ru.kazakova_net.mytargets.databinding.FragmentTargetDetailBinding
-import ru.kazakova_net.mytargets.globaltargets.GlobalTargetsAdapter
-import ru.kazakova_net.mytargets.globaltargets.GlobalTargetsListener
+
 
 /**
  * Created by NKazakova on 10.02.2020.
@@ -34,6 +34,14 @@ class TargetDetailFragment : Fragment() {
 
         binding.targetDetailViewModel = viewModel
         binding.lifecycleOwner = this
+
+        val layoutManager = LinearLayoutManager(context)
+        binding.childTargetsList.layoutManager=layoutManager
+        val dividerItemDecoration = DividerItemDecoration(
+            binding.childTargetsList.context,
+            layoutManager.orientation
+        )
+        binding.childTargetsList.addItemDecoration(dividerItemDecoration)
 
         val adapter = ChildTargetsAdapter(ChildTargetsListener { targetId ->
             viewModel.onChildTargetClicked(targetId)
@@ -61,7 +69,7 @@ class TargetDetailFragment : Fragment() {
             targetId?.let {
                 this.findNavController().navigate(
                     TargetDetailFragmentDirections
-                        .actionTargetDetailFragmentToEditTargetFragment(targetId)
+                        .actionTargetDetailFragmentToAddTargetFragment(targetId)
                 )
 
                 viewModel.doneAddTargetNavigate()
