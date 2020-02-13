@@ -37,6 +37,7 @@ class EditTargetFragment : Fragment() {
 
         viewModel.newTarget.observe(viewLifecycleOwner, Observer { newTarget ->
             binding.newTarget = newTarget
+            this.activity?.title = "Редактирование"
         })
 
         viewModel.navigateToInitialTarget.observe(viewLifecycleOwner, Observer {
