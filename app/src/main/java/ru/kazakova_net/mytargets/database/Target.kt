@@ -1,5 +1,6 @@
 package ru.kazakova_net.mytargets.database
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -14,5 +15,7 @@ data class Target(
     var parentId: Long = -1,
     var title: String = "",
     var description: String = "",
-    var longText: String = ""
+    var longText: String = "",
+    @ColumnInfo(name = "child_count")
+    var childCount: Long = 0L
 )

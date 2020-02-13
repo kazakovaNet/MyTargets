@@ -71,6 +71,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_targetDetailFragment_to_addTargetFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_targetDetailFragment_to_editTargetFragment">
                               <value>
                                 <LayoutPositions />

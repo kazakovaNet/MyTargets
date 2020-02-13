@@ -38,6 +38,7 @@ class GlobalTargetsViewModel(
     }
 
     fun onAddNewTargetClicked() {
+        // todo fix navigation
         uiScope.launch {
             val target = Target()
 

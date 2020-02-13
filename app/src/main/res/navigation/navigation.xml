@@ -11,9 +11,10 @@
         android:label="GlobalTargetsFragment" >
         <action
             android:id="@+id/action_globalTargetsFragment_to_editTargetFragment"
-            app:destination="@id/editTargetFragment" >
-            <argument android:defaultValue="false"
-                android:name="isEdit" />
+            app:destination="@id/editTargetFragment">
+            <argument
+                android:name="isEdit"
+                android:defaultValue="false" />
         </action>
         <action
             android:id="@+id/action_globalTargetsFragment_to_targetDetailFragment"

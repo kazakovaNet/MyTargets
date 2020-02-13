@@ -24,15 +24,26 @@ interface TargetsDatabaseDao {
     @Query("DELETE FROM targets")
     fun clear()
 
-    @Query("SELECT * FROM targets ORDER BY targetId DESC")
-    fun getAllTargets(): LiveData<List<Target>>
-
     @Query("SELECT * FROM targets ORDER BY targetId DESC LIMIT 1")
     fun getNewTarget(): Target?
 
-    @Query("SELECT * FROM targets WHERE parentId = -1")
-    fun getAllGlobalTargets(): LiveData<List<Target>>
-
-    @Query("SELECT * FROM targets WHERE parentId = :parentId")
+    @Query(
+        "SELECT tg1.*, COUNT(tg2.targetId) as child_count " +
+                "FROM targets AS tg1 " +
+                "LEFT OUTER JOIN targets AS tg2 " +
+                "ON tg2.parentId = tg1.targetId " +
+                "WHERE tg1.parentId = :parentId " +
+                "GROUP BY tg1.targetId"
+    )
     fun getChildTargets(parentId: Long): LiveData<List<Target>>
+
+    @Query(
+        "SELECT tg1.*, COUNT(tg2.targetId) as child_count " +
+                "FROM targets AS tg1 " +
+                "LEFT OUTER JOIN targets AS tg2 " +
+                "ON tg2.parentId = tg1.targetId " +
+                "WHERE tg1.parentId = -1 " +
+                "GROUP BY tg1.targetId"
+    )
+    fun getAllGlobalTargets(): LiveData<List<Target>>
 }
