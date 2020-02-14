@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*
-import ru.kazakova_net.mytargets.database.Target
+import ru.kazakova_net.mytargets.database.MyTarget
 import ru.kazakova_net.mytargets.database.TargetsDatabaseDao
 
 /**
@@ -28,8 +28,8 @@ class TargetDetailViewModel(
 
     val childTargets = database.getChildTargets(targetId)
 
-    private val _target = MutableLiveData<Target>()
-    val target: LiveData<Target>
+    private val _target = MutableLiveData<MyTarget>()
+    val target: LiveData<MyTarget>
         get() = _target
 
     private val _navigateToEditTarget = MutableLiveData<Long?>()
@@ -49,13 +49,13 @@ class TargetDetailViewModel(
         viewModelJob.cancel()
     }
 
-    fun onEditTargetClicked(target: Target) {
+    fun onEditTargetClicked(target: MyTarget) {
         _navigateToEditTarget.value = target.targetId
     }
 
-    fun onAddTargetClicked(target: Target) {
+    fun onAddTargetClicked(target: MyTarget) {
         uiScope.launch {
-            val newTarget = Target()
+            val newTarget = MyTarget()
             newTarget.parentId = target.targetId
 
             insert(newTarget)
@@ -68,13 +68,13 @@ class TargetDetailViewModel(
         _navigateToDetailsChildTarget.value = targetId
     }
 
-    private suspend fun insert(newTarget: Target) {
+    private suspend fun insert(newTarget: MyTarget) {
         withContext(Dispatchers.IO) {
             database.insert(newTarget)
         }
     }
 
-    private suspend fun getNewTargetFromDatabase(): Target? {
+    private suspend fun getNewTargetFromDatabase(): MyTarget? {
         return withContext(Dispatchers.IO) {
             database.getNewTarget()
         }

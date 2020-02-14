@@ -13,19 +13,19 @@ import androidx.room.Update
 interface TargetsDatabaseDao {
 
     @Insert
-    fun insert(target: Target)
+    fun insert(target: MyTarget)
 
     @Update
-    fun update(target: Target)
+    fun update(target: MyTarget)
 
     @Query("SELECT * FROM targets WHERE targetId = :key")
-    fun get(key: Long): Target?
+    fun get(key: Long): MyTarget?
 
     @Query("DELETE FROM targets")
     fun clear()
 
     @Query("SELECT * FROM targets ORDER BY targetId DESC LIMIT 1")
-    fun getNewTarget(): Target?
+    fun getNewTarget(): MyTarget?
 
     @Query(
         "SELECT tg1.*, COUNT(tg2.targetId) as child_count " +
@@ -35,7 +35,7 @@ interface TargetsDatabaseDao {
                 "WHERE tg1.parentId = :parentId " +
                 "GROUP BY tg1.targetId"
     )
-    fun getChildTargets(parentId: Long): LiveData<List<Target>>
+    fun getChildTargets(parentId: Long): LiveData<List<MyTarget>>
 
     @Query(
         "SELECT tg1.*, COUNT(tg2.targetId) as child_count " +
@@ -45,5 +45,5 @@ interface TargetsDatabaseDao {
                 "WHERE tg1.parentId = -1 " +
                 "GROUP BY tg1.targetId"
     )
-    fun getAllGlobalTargets(): LiveData<List<Target>>
+    fun getAllGlobalTargets(): LiveData<List<MyTarget>>
 }

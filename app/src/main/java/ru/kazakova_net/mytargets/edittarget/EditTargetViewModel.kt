@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*
-import ru.kazakova_net.mytargets.database.Target
+import ru.kazakova_net.mytargets.database.MyTarget
 import ru.kazakova_net.mytargets.database.TargetsDatabaseDao
 
 /**
@@ -26,8 +26,8 @@ class EditTargetViewModel(
         }
     }
 
-    private val _newTarget = MutableLiveData<Target>()
-    val newTarget: LiveData<Target>
+    private val _newTarget = MutableLiveData<MyTarget>()
+    val newTarget: LiveData<MyTarget>
         get() = _newTarget
 
     private val _navigateToParentTarget = MutableLiveData<Boolean?>()
@@ -43,7 +43,7 @@ class EditTargetViewModel(
         _navigateToParentTarget.value = null
     }
 
-    fun onSaveTargetClicked(target: Target) {
+    fun onSaveTargetClicked(target: MyTarget) {
         uiScope.launch {
             update(target)
 
@@ -51,7 +51,7 @@ class EditTargetViewModel(
         }
     }
 
-    private suspend fun update(target: Target) {
+    private suspend fun update(target: MyTarget) {
         withContext(Dispatchers.IO) {
             database.update(target)
         }

@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ru.kazakova_net.mytargets.database.Target
+import ru.kazakova_net.mytargets.database.MyTarget
 import ru.kazakova_net.mytargets.databinding.ListItemChildTargetsBinding
 
 /**
  * Created by Kazakova_net on 06.02.2020.
  */
 class ChildTargetsAdapter(val clickListener: ChildTargetsListener) :
-    ListAdapter<Target, ChildTargetsAdapter.ViewHolder>(ChildTargetsDiffCallback()) {
+    ListAdapter<MyTarget, ChildTargetsAdapter.ViewHolder>(ChildTargetsDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -25,7 +25,7 @@ class ChildTargetsAdapter(val clickListener: ChildTargetsListener) :
     class ViewHolder private constructor(val binding: ListItemChildTargetsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Target, clickListener: ChildTargetsListener) {
+        fun bind(item: MyTarget, clickListener: ChildTargetsListener) {
             binding.target = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
@@ -41,17 +41,17 @@ class ChildTargetsAdapter(val clickListener: ChildTargetsListener) :
     }
 }
 
-class ChildTargetsDiffCallback : DiffUtil.ItemCallback<Target>() {
+class ChildTargetsDiffCallback : DiffUtil.ItemCallback<MyTarget>() {
 
-    override fun areItemsTheSame(oldItem: Target, newItem: Target): Boolean {
+    override fun areItemsTheSame(oldItem: MyTarget, newItem: MyTarget): Boolean {
         return oldItem.targetId == newItem.targetId
     }
 
-    override fun areContentsTheSame(oldItem: Target, newItem: Target): Boolean {
+    override fun areContentsTheSame(oldItem: MyTarget, newItem: MyTarget): Boolean {
         return oldItem == newItem
     }
 }
 
 class ChildTargetsListener(val clickListener: (targetId: Long) -> Unit) {
-    fun onClick(target: Target) = clickListener(target.targetId)
+    fun onClick(target: MyTarget) = clickListener(target.targetId)
 }

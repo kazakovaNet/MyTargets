@@ -7,17 +7,36 @@
 
         <variable
             name="target"
-            type="ru.kazakova_net.mytargets.database.Target" />
+            type="ru.kazakova_net.mytargets.database.MyTarget" />
 
         <variable
-            name="clickListener"
-            type="ru.kazakova_net.mytargets.globaltargets.GlobalTargetsListener" />
+            name="clickItemListener"
+            type="ru.kazakova_net.mytargets.globaltargets.GlobalTargetsItemListener" />
+
+        <variable
+            name="completeClickListener"
+            type="ru.kazakova_net.mytargets.globaltargets.GlobalTargetsCompleteListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()->clickListener.onClick(target)}">
+        android:onClick="@{()->clickItemListener.onClick(target)}">
+
+        <ImageView
+            android:id="@+id/check_image"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/check_image_content_description"
+            android:onClick="@{()->completeClickListener.onClick(target)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_check_circle"
+            app:targetIsCompletedImage="@{target}" />
 
         <TextView
             android:id="@+id/global_target_title"
@@ -25,10 +44,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:text="@{target.title}"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/check_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Target 1" />
@@ -39,10 +58,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:text="@{target.description}"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/check_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/global_target_title"
             tools:text="Short description global target 1" />
@@ -53,11 +72,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:childTargetsCountString="@{target}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/check_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/global_target_description"
             tools:text="Подцелей: 5" />

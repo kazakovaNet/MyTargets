@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 /**
  * Created by Kazakova_net on 08.02.2020.
  */
-@Database(entities = [Target::class], version = 1, exportSchema = false)
+@Database(entities = [MyTarget::class], version = 1, exportSchema = false)
 abstract class TargetsDatabase : RoomDatabase() {
 
     abstract val targetsDatabaseDao: TargetsDatabaseDao

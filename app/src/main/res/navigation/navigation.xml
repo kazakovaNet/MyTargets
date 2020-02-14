@@ -31,8 +31,8 @@
             android:id="@+id/action_editTargetFragment_to_targetDetailFragment"
             app:destination="@id/targetDetailFragment"
             app:launchSingleTop="false"
-            app:popUpTo="@+id/targetDetailFragment"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@+id/editTargetFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/targetDetailFragment"

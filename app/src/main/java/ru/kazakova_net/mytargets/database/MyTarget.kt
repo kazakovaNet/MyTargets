@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
  * Created by Kazakova_net on 05.02.2020.
  */
 @Entity(tableName = "targets")
-data class Target(
+data class MyTarget(
 
     @PrimaryKey(autoGenerate = true)
     val targetId: Long = 0L,
@@ -17,5 +17,7 @@ data class Target(
     var description: String = "",
     var longText: String = "",
     @ColumnInfo(name = "child_count")
-    var childCount: Long = 0L
+    var childCount: Long = 0L,
+    @ColumnInfo(name = "completed")
+    var isCompleted: Boolean = false
 )

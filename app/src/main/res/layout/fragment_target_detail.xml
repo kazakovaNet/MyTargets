@@ -11,7 +11,7 @@
 
         <variable
             name="target"
-            type="ru.kazakova_net.mytargets.database.Target" />
+            type="ru.kazakova_net.mytargets.database.MyTarget" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

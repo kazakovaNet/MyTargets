@@ -35,15 +35,17 @@ class GlobalTargetsFragment : Fragment() {
         binding.lifecycleOwner = this
 
         val layoutManager = LinearLayoutManager(context)
-        binding.globalTargetsList.layoutManager=layoutManager
+        binding.globalTargetsList.layoutManager = layoutManager
         val dividerItemDecoration = DividerItemDecoration(
             binding.globalTargetsList.context,
             layoutManager.orientation
         )
         binding.globalTargetsList.addItemDecoration(dividerItemDecoration)
 
-        val adapter = GlobalTargetsAdapter(GlobalTargetsListener { targetId ->
-            viewModel.onGlobalTargetClicked(targetId)
+        val adapter = GlobalTargetsAdapter(GlobalTargetsItemListener {
+            viewModel.onGlobalTargetItemClicked(it)
+        }, GlobalTargetsCompleteListener {
+            viewModel.onGlobalTargetCompleteClicked(it)
         })
 
         binding.globalTargetsList.adapter = adapter
@@ -61,7 +63,7 @@ class GlobalTargetsFragment : Fragment() {
 
         viewModel.targets.observe(viewLifecycleOwner, Observer { targets ->
             targets?.let {
-                adapter.submitList(targets)
+                adapter.submitList(ArrayList(targets))
             }
         })
 
@@ -73,6 +75,14 @@ class GlobalTargetsFragment : Fragment() {
                 )
 
                 viewModel.doneAddNewTargetNavigate()
+            }
+        })
+
+        viewModel.refreshTaskList.observe(viewLifecycleOwner, Observer {
+            it?.let {
+//                adapter.notifyDataSetChanged()
+
+                viewModel.doneRefreshTaskList()
             }
         })
 
